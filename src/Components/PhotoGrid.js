@@ -1,6 +1,10 @@
 import Photo from "./Photo";
 
 const PhotoGrid = ({photos}) => {
+
+    if (!photos ){
+        return null;
+    }
     
     const photoNodes = photos.map((photo)=>{
           return (
@@ -13,9 +17,10 @@ const PhotoGrid = ({photos}) => {
 
     return (
         <>
-        <h3>This will contain the rendered list of individual photos</h3>
-        <div>{photoNodes}</div>
-        
+        <div className="photoGrid">
+        {/* <h3>PhotoGrid</h3> */}
+        {photoNodes}
+        </div>
         </>
     );
 
