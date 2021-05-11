@@ -4,8 +4,8 @@ const CountyChanger = ({countyChange}) => {
 
     return (
         <div className="dropDown">
-        <select onChange={countyChange}>
-            <option selected ="default choice" value="100000">Antrim</option>
+        <select onChange={countyChange} className="county-change">
+            <option selected ="default choice" value="100002">Dublin</option>
         </select>
         </div>
     )
