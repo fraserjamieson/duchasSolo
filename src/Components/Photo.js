@@ -3,7 +3,7 @@ const Photo = ({photo}) => {
 
     // 'photo' prop value is an array of objects returned from JSON
 
-    if (!photo.referenceNumber){
+    if (!photo.referenceNumber || !photo.photographer){
         return null;
     }
 
