@@ -6,9 +6,10 @@ const PhotoGrid = ({photos}) => {
 
     if (!photos ){
         return null;
+
     } else if (photos.length === 0){
         return (
-            <p>no photos available at this time</p>
+            <p>no photos available.  A Dateranger will be included for other time periods relevent to this county</p>
         )
     } else {
         

@@ -6,8 +6,7 @@ const PhotoContainer = () => {
     let name = 'Duchas Photographic Collection';
 
     const [photos, setPhotos] = useState([]);
-    const [countyID, setCountyID] = useState("")
-
+    const [countyID, setCountyID] = useState("100000")
     const fetchPhotos = () => {
         console.log('logging fetch data-')
         fetch(`https://www.duchas.ie/api/v0.6/cbeg/?CountyID=${countyID}&DateFrom=1950&DateTo=1959&apiKey=D4vMJJ39vTaRD5ZEy4uJU2mHrG82UT`)
@@ -21,7 +20,7 @@ const PhotoContainer = () => {
         fetchPhotos();
     },[countyID]);
 
-    const handleCountyChange = (countyID) => {
+    const countyChange = (countyID) => {
         setCountyID(countyID);
     }
 
@@ -30,7 +29,7 @@ const PhotoContainer = () => {
         <h1 className="App-header">{name}</h1>
         <div className="App">
             <CountyChanger 
-            countyChange={handleCountyChange}
+            countyChange={countyChange}
             />
             <PhotoGrid 
             photos={photos}/>
