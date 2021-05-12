@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-const CountyChanger = ({countyChange}) => {
+const CountyChanger = ({countyChange, photos}) => {
     //  null;
 
     const [countyDropdown, setCountyDropdown] = useState("100000");
@@ -16,7 +16,8 @@ const CountyChanger = ({countyChange}) => {
 
     return (
         <div className="dropDown">
-        <select onChange={secondHandleChange} className="county-change" value={countyDropdown}>
+        <select onChange={secondHandleChange} className="county-change" multiple={true} value={photos}> 
+        {/* this 'value' attribute ^^ makes sure controlled component is implemented. */}
             <option value="100000">Antrim</option>
             <option value="100001">Armagh</option>
             <option value="100002">Dublin</option>

@@ -30,6 +30,7 @@ const PhotoContainer = () => {
         <div className="App">
             <CountyChanger 
             countyChange={countyChange}
+            photos={photos}
             />
             <PhotoGrid 
             photos={photos}/>
