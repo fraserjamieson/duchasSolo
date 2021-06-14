@@ -5,7 +5,7 @@ const PhotoGrid = ({photos}) => {
     photos = Array.from(photos);
 
     if (!photos ){
-        return null;
+        return <h1>Loading...</h1>;
 
     } else if (photos.length === 0){
         return (

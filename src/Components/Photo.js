@@ -3,24 +3,22 @@ const Photo = ({photo}) => {
 
     // 'photo' prop value is an array of objects returned from JSON
 
+    const imgMissing = "no photo available for this entry"
+
     if (!photo.referenceNumber || !photo.photographer){
         return null;
     }
 
     const {archivedDescription, date, handbookTopic, photographer} = photo;
-    // const [dublin] = Object.entries(photo);
-
-    // const {counties} = dublin;
-    // 'counties' is an array of objects
 
     return (
     
     <figure className="figureImg" >
-    <img src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`}></img>
+    <img src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`} alt={imgMissing}></img>
         <figcaption>
             <p>{archivedDescription}</p>
             {/* <p>{counties.qualifiedNameEN}</p> */}
-            <p>{date.isoDate}</p>
+            <p>{date ? date.isoDate : 'no date assigned'}</p>
             <p>{handbookTopic.topicEN}</p>
             <p>{photographer.names[0].fullName}</p>
             {/* <p>{counties.nameEn}</p> */}

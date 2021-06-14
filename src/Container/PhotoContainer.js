@@ -8,25 +8,37 @@ const PhotoContainer = () => {
 
     const [photos, setPhotos] = useState([]);
     const [countyID, setCountyID] = useState("100000");
+    const [startDate, setStartDate] = useState("1950");
+    const [endDate, setEndDate] = useState("1959");
 
-    // const [dateRange, setDateRanger] = useState("");
 
     const fetchPhotos = () => {
         console.log('logging fetch data-')
-        fetch(`https://www.duchas.ie/api/v0.6/cbeg/?CountyID=${countyID}&DateFrom=1950&DateTo=1959&apiKey=D4vMJJ39vTaRD5ZEy4uJU2mHrG82UT`)
+        fetch(`https://www.duchas.ie/api/v0.6/cbeg/?CountyID=${countyID}&DateFrom=${startDate}&DateTo=${endDate}&apiKey=D4vMJJ39vTaRD5ZEy4uJU2mHrG82UT`)
         .then(res => res.json())
         .then(data=> {
-            console.log(data)
+            console.log('fetch from county with interpolated start date - to ', data)
             setPhotos(data)})
-    }
+    };
 
     useEffect(()=>{
         fetchPhotos();
-    },[countyID]);
+        changeDate(startDate);
+    },[countyID, startDate, endDate]);
 
     const countyChange = (countyID) => {
         setCountyID(countyID);
-    }
+    };
+
+    const dateChange = (date) => {
+        setStartDate(date);
+    };
+
+    const changeDate = (startDate) => {
+        const parsed = parseInt(startDate) + 9; // parsing the string value for an integer, because otherwise it wouldn't be possible to count from the start to end date without this flipped data conversion method.
+        setEndDate(`${parsed}`);
+
+    };
 
     return (
         <>
@@ -36,7 +48,7 @@ const PhotoContainer = () => {
             countyChange={countyChange}
             photos={photos}
             />
-            {/* <DateChanger /> */}
+            <DateChanger dateChanger={dateChange} />
             <PhotoGrid 
             photos={photos}/>
            

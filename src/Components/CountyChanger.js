@@ -5,6 +5,7 @@ const CountyChanger = ({countyChange, photos}) => {
     const [county, setCounty] = useState([]);
 
     const secondHandleChange = (e) => {
+        console.log(e);
         setCountyID(e.target.value);
     }
 
@@ -15,13 +16,13 @@ const CountyChanger = ({countyChange, photos}) => {
         .then(data => {
             console.log(data)
             setCounty(data)})
-            .catch(err => console.log(err));
+            .catch(err => console.log(err));  // to retrieve countys and their info as opposed to hard coding them all in
     }
 
     useEffect(()=>{
         getCountyIDs();
         countyChange(countyID);
-    }, [county]);
+    }, [countyID]);
 
 
     return (
