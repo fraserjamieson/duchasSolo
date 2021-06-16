@@ -1,22 +1,45 @@
-const SinglePhotoView = ({props}) => {
-    
-    const [popOutPhoto, setPopOutPhoto] = useState("");
+import { useParams, Link } from "react-router-dom";
+import axios, { useEffect } from "react";
+import Button from "react";
+import {useState} from "react";
 
-    let {id} = useParams();
+const SinglePhotoView = () => {
+    
+    const [popOutPhoto, setPopOutPhoto] = useState({});
+
+    let { id } = useParams();
+
+    const fetchPhotos = () => {
+        console.log('getting photo...')
+    const url = `https://www.duchas.ie/api/v0.5/cbeg/${id}?apiKey=Rua2njQgwdoZ9vnRb7JTV7dfHQ4c5a`
+
+    fetch(url)
+    .then(res => res.json())
+    .then(data => setPopOutPhoto(data))
+    };
+
+    useEffect(()=>{
+        fetchPhotos();
+    }, [])
+
+    // let year = popOutPhoto.date;
 
     return (
-        <h1>Here will be pop out image{id}</h1>
+        <>
         
-    //       <figure className="figureImg" >
-    //     <img src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`}onError={checkImage}/>  
-    //     <p>{archivedDescription}</p>
-    //     <figcaption>
+        <figure className="figureImg" >
+        <img src={`https://doras.gaois.ie/cbeg/${popOutPhoto.referenceNumber}.jpg?format=jpg&width=620&height=620&quality=85`}/>  
+        <p>{popOutPhoto.archivedDescription}</p>
+        <figcaption>
         
-    //     <p>{date ? date.year : 'no date assigned'}</p>
-    //     <p>{handbookTopic.topicEN}</p>
-    //     <p>{photographer.names[0].fullName}</p>
-    //     </figcaption>
-    //     </figure> 
+        <p>{popOutPhoto.date ? popOutPhoto.date.year : 'no date assigned'}</p>
+        <Link to="/">
+            <button>Go back</button>
+        </Link>
+        </figcaption>
+        </figure> 
+        
+        </>
     )
 
 }

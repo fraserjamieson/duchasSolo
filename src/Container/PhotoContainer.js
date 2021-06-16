@@ -2,7 +2,7 @@ import PhotoGrid from '../Components/PhotoGrid';
 import {useEffect, useState} from 'react';
 import CountyChanger from '../Components/CountyChanger';
 import DateChanger from '../Components/DateChanger';
-import {Router, Route} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SinglePhotoView from '../Components/SinglePhotoView';
 
 const PhotoContainer = () => {
@@ -45,16 +45,17 @@ const PhotoContainer = () => {
     };
 
     return (
-        <>
-        <h1 className="App-header">{name}</h1>
-        <div className="App">
+    
             <Router>
+            <>
+            <h1 className="App-header">{name}</h1>
+            <div className="App">
                 <CountyChanger 
                 countyChange={countyChange}
                 photos={photos}
                 />
                 <DateChanger dateChanger={dateChange} />
-
+                <Switch>
                 <Route 
                     exact path="/" 
                     render={()=> 
@@ -62,13 +63,15 @@ const PhotoContainer = () => {
                     photos={photos}/>}
                 />
                 <Route 
-                    exact path = "/:id"
+                    path = "/:id"
                     component={SinglePhotoView}
                 />
+                </Switch>
+            </div>
+            </>
             </Router>
            
-        </div>
-        </>
+       
     )
 
 }

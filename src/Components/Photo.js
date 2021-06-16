@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import {NavLink} from "react";
-import SinglePhotoView from "react";
+import { useState } from "react";
+import {Link} from "react-router-dom";
 
 const Photo = ({photo}) => {
 
@@ -20,23 +19,47 @@ const Photo = ({photo}) => {
         setValue(false)
     };
 
+    let photoCaption = null;
+
     return (
     <>
-        <NavLink to=  "/SinglePhotoView"
-        activeStyle={{
-            fontWeight: "bold",
-            color: "green"
-        }}>
-            More info
-        </NavLink>
         <figure className="figureImg" >
-        <img src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`}onError={checkImage}/>  
+        <img 
+        src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`}
+        onError={checkImage}/>  
+
+        <div>{date ? 
+        photoCaption =
         <figcaption>
-        
-        <p>{date ? date.year : 'no date assigned'}</p>
-        <p>{handbookTopic.topicEN}</p>
-        <p>{photographer.names[0].fullName}</p>
+                {date.year}
+            <p>{handbookTopic.topicEN}</p>
+            <p>{photographer.names[0].fullName}</p>
+            <p>{archivedDescription}</p>
+            <Link to=  {`${photo.id}`}
+            activeStyle={{
+                fontWeight: "bold",
+                color: "green"
+            }}>
+                More info
+            </Link>
         </figcaption>
+
+         : 
+         photoCaption =
+         <figcaption>
+            
+            <p>{handbookTopic.topicEN}</p>
+            <p>{photographer.names[0].fullName}</p>
+            <p>{archivedDescription}</p>
+            <Link to=  {`${photo.id}`}
+            activeStyle={{
+                fontWeight: "bold",
+                color: "green"
+            }}>
+                More info
+            </Link>
+        </figcaption>
+         }</div>
         </figure> 
     
     </>
