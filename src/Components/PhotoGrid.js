@@ -1,4 +1,5 @@
 import Photo from "./Photo";
+import Route from "react";
 
 const PhotoGrid = ({photos}) => {
 
@@ -15,6 +16,7 @@ const PhotoGrid = ({photos}) => {
         
         const photoNodes = photos.map((photo)=>{
             return (
+            
             <Photo
             photo={photo}
             key={photo.id}
@@ -25,7 +27,6 @@ const PhotoGrid = ({photos}) => {
         return (
             <>
             <div className="photoGrid">
-            {/* <h3>PhotoGrid</h3> */}
             {photoNodes}
             </div>
             </>

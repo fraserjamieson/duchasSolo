@@ -2,6 +2,8 @@ import PhotoGrid from '../Components/PhotoGrid';
 import {useEffect, useState} from 'react';
 import CountyChanger from '../Components/CountyChanger';
 import DateChanger from '../Components/DateChanger';
+import {Router, Route} from "react";
+import SinglePhotoView from '../Components/SinglePhotoView';
 
 const PhotoContainer = () => {
     let name = 'Duchas Photographic Collection';
@@ -13,12 +15,14 @@ const PhotoContainer = () => {
 
 
     const fetchPhotos = () => {
-        console.log('logging fetch data-')
         fetch(`https://www.duchas.ie/api/v0.6/cbeg/?CountyID=${countyID}&DateFrom=${startDate}&DateTo=${endDate}&apiKey=D4vMJJ39vTaRD5ZEy4uJU2mHrG82UT`)
-        .then(res => res.json())
+        .then(res => {
+            return res.json();
+        })
         .then(data=> {
             console.log('fetch from county with interpolated start date - to ', data)
             setPhotos(data)})
+            .catch(err => console.error(err))
     };
 
     useEffect(()=>{
@@ -44,13 +48,24 @@ const PhotoContainer = () => {
         <>
         <h1 className="App-header">{name}</h1>
         <div className="App">
-            <CountyChanger 
-            countyChange={countyChange}
-            photos={photos}
-            />
-            <DateChanger dateChanger={dateChange} />
-            <PhotoGrid 
-            photos={photos}/>
+            <Router>
+                <CountyChanger 
+                countyChange={countyChange}
+                photos={photos}
+                />
+                <DateChanger dateChanger={dateChange} />
+
+                <Route 
+                    exact path="/" 
+                    render={()=> 
+                    <PhotoGrid
+                    photos={photos}/>}
+                />
+                <Route 
+                    exact path = "/:id"
+                    component={SinglePhotoView}
+                />
+            </Router>
            
         </div>
         </>
