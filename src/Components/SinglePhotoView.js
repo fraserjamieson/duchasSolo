@@ -10,7 +10,6 @@ const SinglePhotoView = () => {
     let { id } = useParams();
 
     const fetchPhotos = () => {
-        console.log('getting photo...')
     const url = `https://www.duchas.ie/api/v0.5/cbeg/${id}?apiKey=Rua2njQgwdoZ9vnRb7JTV7dfHQ4c5a`
 
     fetch(url)
@@ -21,8 +20,6 @@ const SinglePhotoView = () => {
     useEffect(()=>{
         fetchPhotos();
     }, [])
-
-    // let year = popOutPhoto.date;
 
     return (
         <>
