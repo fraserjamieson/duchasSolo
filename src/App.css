@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  max-width: 940px;
+  max-width: 80%;
   min-width: 720px;
   margin: 10px auto;
   padding: 20px;
@@ -32,21 +32,22 @@
 }
 
 .photoGrid {
-  display:block;
+  display: grid;
   overflow: auto;
-  clear: both;
-  margin-top:20px;
-  padding: 20px 10px 30px 15px;
-  width: 100;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 20px;
+  padding: 23px 10px 30px 15px;
+  grid-gap: 30px;
 }
 
 .figureImg {
   text-align: center;
   margin: 20px auto;
-  width: 250px;
-  float:left;
-  /* clear: both; */
+  width: 100%;
+  float: left;
+  height: 100%;
   background-color: orange;
+  object-fit: cover;
 }
 
 .noFigureImg{
@@ -55,4 +56,26 @@
   transition: 0.3 all ease;
   z-index: 1000;
   background: #cfd8dc;
+}
+
+.singleFigureWrapper {
+  margin: 10px auto;
+  background-color: orange;
+  object-fit: cover;
+  text-align: center;
+  position: relative;
+}
+.singleFigureImg > figcaption {
+  margin: 0;
+  position: absolute;
+  background: chartreuse;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-right: -50%;
+}
+
+.singleFigureImg > figure > figcaption {
+  margin: 10px 50px;
+  padding: 20px;
+  border: dotted blue 1px;
 }

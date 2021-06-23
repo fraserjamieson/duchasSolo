@@ -23,45 +23,44 @@ const Photo = ({photo}) => {
 
     return (
     <>
-        <figure className="figureImg" >
+    <figure className="figureImg" >
         <img 
-        src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=235&height=128&mode=crop&anchor=center&quality=85`}
-        onError={checkImage}/>  
-
-        <div>{date ? 
+        src={`https://doras.gaois.ie/cbeg/${photo.referenceNumber}.jpg?format=jpg&width=350&height=256&mode=crop&anchor=center&quality=85`}
+        onError={checkImage}/> 
+        
+        {date ? 
         photoCaption =
         <figcaption>
-                {date.year}
-            <p>{handbookTopic.topicEN}</p>
-            <p>{photographer.names[0].fullName}</p>
-            <p>{archivedDescription}</p>
-            <Link to=  {`${photo.id}`}
-            activeStyle={{
-                fontWeight: "bold",
-                color: "green"
-            }}>
-                More info
-            </Link>
+            {date.year}
+        <p>{handbookTopic.topicEN}</p>
+        <p>{photographer.names[0].fullName}</p>
+        
+        <Link to=  {`${photo.id}`}
+        activeStyle={{
+            fontWeight: "bold",
+            color: "green"
+        }}>
+            More info
+        </Link>
         </figcaption>
 
-         : 
-         photoCaption =
-         <figcaption>
-            
-            <p>{handbookTopic.topicEN}</p>
-            <p>{photographer.names[0].fullName}</p>
-            <p>{archivedDescription}</p>
-            <Link to=  {`${photo.id}`}
-            activeStyle={{
-                fontWeight: "bold",
-                color: "green"
-            }}>
-                More info
-            </Link>
-        </figcaption>
-         }</div>
-        </figure> 
+        : 
+        photoCaption =
+        <figcaption>
+        
+        <p>{handbookTopic.topicEN}</p>
+        <p>{photographer.names[0].fullName}</p>
+        
+        <Link to=  {`${photo.id}`}
+        activeStyle={{
+            fontWeight: "bold",
+            color: "green"
+        }}>
+            More info
+        </Link>
+        </figcaption>}
     
+    </figure> 
     </>
     );
 

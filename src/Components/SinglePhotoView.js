@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import axios, { useEffect } from "react";
-import Button from "react";
 import {useState} from "react";
 
 const SinglePhotoView = () => {
@@ -23,19 +22,19 @@ const SinglePhotoView = () => {
 
     return (
         <>
+        <div className="singleFigureWrapper">
+            <figure className="singleFigureImg">
+            <img src={`https://doras.gaois.ie/cbeg/${popOutPhoto.referenceNumber}.jpg?format=jpg&width=620&height=620&quality=85`}/>  
         
-        <figure className="figureImg" >
-        <img src={`https://doras.gaois.ie/cbeg/${popOutPhoto.referenceNumber}.jpg?format=jpg&width=620&height=620&quality=85`}/>  
-        <p>{popOutPhoto.archivedDescription}</p>
-        <figcaption>
-        
-        <p>{popOutPhoto.date ? popOutPhoto.date.year : 'no date assigned'}</p>
-        <Link to="/">
-            <button>Go back</button>
-        </Link>
-        </figcaption>
-        </figure> 
-        
+            <figcaption>
+            {popOutPhoto.archivedDescription}<br></br><br></br>
+            {popOutPhoto.date ? popOutPhoto.date.year : 'no date assigned'}<br></br><br></br>
+            <Link to="/">
+                <button>Go back</button>
+            </Link>
+            </figcaption>
+            </figure> 
+        </div>
         </>
     )
 
