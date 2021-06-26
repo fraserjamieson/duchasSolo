@@ -1,20 +1,19 @@
 import Photo from "./Photo";
-import ReactPaginate from 'react-paginate';
 
-const PhotoGrid = ({pageCount, changePage, currentPage}) => {
+const PhotoGrid = ({pageCount, changePage, currentPage, photos, photosPerPage}) => {
 
-    currentPage = Array.from(currentPage);
+    photos = Array.from(photos);
 
-    if (!currentPage ){
+    if (!photos ){
     return <h1>Loading...</h1>;
 
-    } else if (currentPage.length === 0){
+    } else if (photos.length === 0){
     return (
-        <p>no currentPage available.  A Dateranger will be included for other time periods relevent to this county</p>
+        <p>no photos available.  A Dateranger will be included for other time periods relevent to this county</p>
     )
     } else {
         
-    const photoNodes = currentPage.map((photo)=>{
+    const photoNodes = photos.map((photo)=>{
     return (
     
     <Photo
@@ -26,13 +25,11 @@ const PhotoGrid = ({pageCount, changePage, currentPage}) => {
 
     return (
         <>
-        <div className="photoGrid">
-        {photoNodes}
-        </div>
-        <ReactPaginate
-                previousLabel={'previous'}
+    
+        {/* <ReactPaginate
+                previousLabel={'go back'}
                 nextLabel={'next'}
-                breakLabel={'...'}
+                // breakLabel={'...'}
                 breakClassName={'break-me'}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
@@ -40,8 +37,12 @@ const PhotoGrid = ({pageCount, changePage, currentPage}) => {
                 onPageChange={changePage}
                 containerClassName={'pagination'}
                 activeClassName={'active'}
-            />
-            {/* {currentPage} */}
+            /> */}
+
+        <div className="photoGrid">
+        {photoNodes}
+        </div>
+            
         </>
     );
 

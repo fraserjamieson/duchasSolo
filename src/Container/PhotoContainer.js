@@ -4,45 +4,46 @@ import CountyChanger from '../Components/CountyChanger';
 import DateChanger from '../Components/DateChanger';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SinglePhotoView from '../Components/SinglePhotoView';
-
+import Pagination from '../Components/Pagination';
 
 const PhotoContainer = () => {
     let name = 'Duchas Photographic Collection';
 
     const [photos, setPhotos] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+
     const [countyID, setCountyID] = useState("100000");
     const [startDate, setStartDate] = useState("1950");
     const [endDate, setEndDate] = useState("1959");
-    const [pageCount, setPageCount] = useState(0);
-    // const [offset, setOffset] = useState(0);
-    const [perPage] = useState(10);
-    const [currentPage, setCurrentPage] = useState(0);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [photosPerPage, setPhotosPerPage] = useState(20);
+    // const [pageCount, setPageCount] = useState(1);
+    const [offset, setOffset] = useState(0);
 
 
     const fetchPhotos = () => {
+        setLoaded(true);
         fetch(`https://www.duchas.ie/api/v0.6/cbeg/?CountyID=${countyID}&DateFrom=${startDate}&DateTo=${endDate}&apiKey=D4vMJJ39vTaRD5ZEy4uJU2mHrG82UT`)
         .then(res => {
             return res.json();
         })
         .then(data=> {
-            console.log('fetch from county with interpolated start date - to ', data)
-            setPhotos(data.slice(offset, offset + perPage))
-            setPageCount(Math.ceil(photos.length / perPage))
+            console.log('initial fetch from county with interpolated start date - to ', data) 
+            setPhotos(data)
+            // setLoaded(false)
         })
             .catch(err => console.error(err))
     };
 
-    const offset = currentPage * perPage;
-
-    // const currentPageData = photos
-    // .slice(offset, offset + perPage)
-
     useEffect(()=>{
         fetchPhotos();
         changeDate(startDate);
-    },[countyID, startDate, endDate]);   // <<< This dependancy array functins as 'ComponentDidMount' ??
+        
+    },[countyID, startDate, endDate]);   // <<< This dependancy array functins as 'ComponentDidMount' ??  "mimics componentDidMount lifecycle method"
 
     const countyChange = (countyID) => {
+        
         setCountyID(countyID);
     };
 
@@ -56,12 +57,17 @@ const PhotoContainer = () => {
 
     };
 
-    const handlePageClick = (e) => {
-        let selectedPage = e.selected;
-        setCurrentPage(selectedPage)
-    }
+    // const handlePageClick = (e) => {
+    //     let selectedPage = e.selected;
 
+    //     setOffset(selectedPage * perPage)
+    //     setCurrentPage(selectedPage)
+        
+    // }
 
+    const indexOfLastPost = currentPage * photosPerPage;
+    const indexOfFirstPost = indexOfLastPost - photosPerPage;
+    const currentPhotos = photos.slice(indexOfFirstPost, indexOfLastPost);
 
     return (
     
@@ -72,26 +78,27 @@ const PhotoContainer = () => {
         <div className="App">
             <CountyChanger 
             countyChange={countyChange}
-            photos={photos}
+            photos={currentPhotos}
             />
             <DateChanger dateChanger={dateChange} />
             <Switch>
-            <Route 
-                exact path="/" 
-                render={()=> 
-                <PhotoGrid
-                photos={photos}
-                // MAYBE PASS EVENT HANDLER AS PROPS DOWN TO REACT IN HERE
-                pageCount={pageCount}
-                changePage={handlePageClick}
-                currentPage={photos}
-                />}
-            />
-            <Route 
-                path = "/:id"
-                component={SinglePhotoView}
-            />
+                <Route 
+                    exact path="/" 
+                    render={()=> 
+                    <PhotoGrid
+                        photos={currentPhotos}
+                        loaded={loaded}
+                        currentPage={currentPage}
+                        //  
+                    />}
+                />
+                <Route 
+                    path = "/:id"
+                    component={SinglePhotoView}
+                />
             </Switch>
+            <Pagination
+                photosPerPage={photosPerPage} totalPhotos={photos.length}/>
                 
         </div>
         </>
