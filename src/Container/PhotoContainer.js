@@ -5,6 +5,8 @@ import DateChanger from '../Components/DateChanger';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SinglePhotoView from '../Components/SinglePhotoView';
 import Pagination from '../Components/Pagination';
+import PhotoContainerMap from '../Components/PhotoContainerMap';
+import 'leaflet/dist/leaflet.css';
 
 const PhotoContainer = () => {
     let name = 'Duchas Photographic Collection';
@@ -17,9 +19,7 @@ const PhotoContainer = () => {
     const [endDate, setEndDate] = useState("1959");
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [photosPerPage, setPhotosPerPage] = useState(20);
-    // const [pageCount, setPageCount] = useState(1);
-    const [offset, setOffset] = useState(0);
+    const [photosPerPage] = useState(20);
 
 
     const fetchPhotos = () => {
@@ -67,13 +67,19 @@ const PhotoContainer = () => {
 
     const indexOfLastPost = currentPage * photosPerPage;
     const indexOfFirstPost = indexOfLastPost - photosPerPage;
+    
     const currentPhotos = photos.slice(indexOfFirstPost, indexOfLastPost);
 
+    // Change page handler
+    const handlePaginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+        window.scrollTo({top:0, left:0, behavior: 'smooth'})
+    };
+
     return (
-    
+        <>
         <Router>
 
-        <>
         <h1 className="App-header">{name}</h1>
         <div className="App">
             <CountyChanger 
@@ -96,15 +102,20 @@ const PhotoContainer = () => {
                     path = "/:id"
                     component={SinglePhotoView}
                 />
-            </Switch>
-            <Pagination
-                photosPerPage={photosPerPage} totalPhotos={photos.length}/>
-                
+            </Switch> 
         </div>
-        </>
 
         </Router>
-           
+
+        <Pagination
+        photosPerPage={photosPerPage} 
+        totalPhotos={photos.length} 
+        paginate={handlePaginate}/>
+
+        <PhotoContainerMap />
+
+        </>
+
        
     )
 

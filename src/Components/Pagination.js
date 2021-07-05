@@ -1,19 +1,27 @@
-const Pagination = ({photosPerPage, totalPhotos}) => {
+const Pagination = ({photosPerPage, totalPhotos, paginate}) => {
     const pageNumebrs= [];
 
-    for(let i=1; i <= Math.ceil(totalPhotos / photosPerPage); i++){
+    const changingPageNumbers = Math.ceil(totalPhotos / photosPerPage);
+
+    for(let i=1; i <= changingPageNumbers; i++){
         pageNumebrs.push(i);
     }
-    console.log()
+    
+    // let noPhotos = () => {
+    //     if (!totalPhotos)
+    //     return;
+    // }
+
     return(
         <nav>
             <ul className="pagination">
                 
+                {/* {noPhotos} */}
                 {pageNumebrs.map(number => (
-                     <li key={number} className="page-item">
-                        <a href="!#" className="page-link">
+                    <li key={number} className="page-item">
+                        <button href="#" onClick={()=> paginate(number)} className="page-link">
                             {number}
-                        </a>
+                        </button>
                     </li>
                 ))}
             </ul>

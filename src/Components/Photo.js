@@ -34,12 +34,9 @@ const Photo = ({photo}) => {
             {date.year}
         <p>{handbookTopic.topicEN}</p>
         <p>{photographer.names[0].fullName}</p>
+        <p>{archivedDescription}</p>
         
-        <Link to=  {`${photo.id}`}
-        activeStyle={{
-            fontWeight: "bold",
-            color: "green"
-        }}>
+        <Link to=  {`${photo.id}`}>
             More info
         </Link>
         </figcaption>
@@ -51,11 +48,7 @@ const Photo = ({photo}) => {
         <p>{handbookTopic.topicEN}</p>
         <p>{photographer.names[0].fullName}</p>
         
-        <Link to=  {`${photo.id}`}
-        activeStyle={{
-            fontWeight: "bold",
-            color: "green"
-        }}>
+        <Link to=  {`${photo.id}`}>
             More info
         </Link>
         </figcaption>}

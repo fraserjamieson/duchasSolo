@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import axios, { useEffect } from "react";
 import {useState} from "react";
+import PhotoContainerMap from "../Components/PhotoContainerMap";
 
 const SinglePhotoView = () => {
     
@@ -14,6 +15,7 @@ const SinglePhotoView = () => {
     fetch(url)
     .then(res => res.json())
     .then(data => setPopOutPhoto(data))
+    .catch(err => console.error(err));
     };
 
     useEffect(()=>{
@@ -35,6 +37,8 @@ const SinglePhotoView = () => {
             </figcaption>
             </figure> 
         </div>
+
+        <PhotoContainerMap />
         </>
     )
 

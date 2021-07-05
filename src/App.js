@@ -1,4 +1,4 @@
-
+import 'leaflet/dist/leaflet.css';
 import './App.css';
 import PhotoContainer from './Container/PhotoContainer';
 

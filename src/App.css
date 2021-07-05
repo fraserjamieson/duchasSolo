@@ -70,8 +70,7 @@
   position: absolute;
   background: chartreuse;
   left: 50%;
-  transform: translate(-50%, -50%);
-  margin-right: -50%;
+  transform: translate(-50%, -106%);
 }
 
 .singleFigureImg > figure > figcaption {
@@ -89,25 +88,33 @@ list-style: none;
 outline: none;
 
 }
-.pagination > .active > a{
+.pagination > button.page-link{
   background-color:rgb(91, 91, 91) ;
   border-color: rgb(91, 91, 91);
   color: #fff;
 }
-.pagination > li > a{
+.pagination > button.page-link:hover{
   border: 1px solid rgb(91, 91, 91);
   padding: 5px 10px;
   outline: none;
-  cursor: pointer;
+  cursor: grab;
 }
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: rgb(91, 91, 91);
+.pagination > button.page-link, .pagination > span, .pagination > button.page-link:hover, .pagination > span:hover, .pagination > button.page-link:focus, .pagination > span:focus{
+  background-color: orange;
   border-color: rgb(91, 91, 91);
-  outline: none ;
+  color: white;
+  outline:#61dafb;
+  transition-duration: 0.4s;
 }
-.pagination > li > a, .pagination > li > span{
+.pagination > li > button, .pagination > li > span{
   color: rgb(91, 91, 91);
 }
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
-  border-radius: unset
+.pagination > li:first-child > button, .pagination > li:first-child > span, .pagination > li:last-child > button, .pagination > li:last-child > span{
+  border-radius: unset;
 }
+
+/* // MAP
+ */
+
+ #mapid { 
+   height: 180px; }

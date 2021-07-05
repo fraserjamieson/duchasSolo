@@ -1,8 +1,9 @@
 import Photo from "./Photo";
+import Pagination from '../Components/Pagination';
 
-const PhotoGrid = ({pageCount, changePage, currentPage, photos, photosPerPage}) => {
+const PhotoGrid = ({ photos }) => {
 
-    photos = Array.from(photos);
+    // photos = Array.from(photos);
 
     if (!photos ){
     return <h1>Loading...</h1>;
@@ -25,19 +26,6 @@ const PhotoGrid = ({pageCount, changePage, currentPage, photos, photosPerPage}) 
 
     return (
         <>
-    
-        {/* <ReactPaginate
-                previousLabel={'go back'}
-                nextLabel={'next'}
-                // breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={changePage}
-                containerClassName={'pagination'}
-                activeClassName={'active'}
-            /> */}
 
         <div className="photoGrid">
         {photoNodes}
